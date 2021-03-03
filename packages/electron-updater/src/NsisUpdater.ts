@@ -34,12 +34,12 @@ export class NsisUpdater extends BaseUpdater {
           await this.httpExecutor.download(fileInfo.url, destinationFile, downloadOptions)
         }
 
-        const signatureVerificationStatus = await this.verifySignature(destinationFile)
-        if (signatureVerificationStatus != null) {
-          await removeTempDirIfAny()
-          // noinspection ThrowInsideFinallyBlockJS
-          throw newError(`New version ${downloadUpdateOptions.updateInfoAndProvider.info.version} is not signed by the application owner: ${signatureVerificationStatus}`, "ERR_UPDATER_INVALID_SIGNATURE")
-        }
+        // const signatureVerificationStatus = await this.verifySignature(destinationFile)
+        // if (signatureVerificationStatus != null) {
+        //   await removeTempDirIfAny()
+        //   // noinspection ThrowInsideFinallyBlockJS
+        //   throw newError(`New version ${downloadUpdateOptions.updateInfoAndProvider.info.version} is not signed by the application owner: ${signatureVerificationStatus}`, "ERR_UPDATER_INVALID_SIGNATURE")
+        // }
 
         if (isWebInstaller) {
           if (await this.differentialDownloadWebPackage(downloadUpdateOptions, packageInfo!!, packageFile!!, provider)) {
